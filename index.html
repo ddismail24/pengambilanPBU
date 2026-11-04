@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Pengambilan Pelajar — Politeknik Balik Pulau</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="logo-pbu-ori.png" alt="Logo Politeknik Balik Pulau" class="sidebar-logo" />
+    </div>
+    <ul class="nav-list">
+      <li><a href="#sec-kpi" class="nav-link active"><i class="fa-solid fa-gauge-high"></i> Ringkasan KPI</a></li>
+      <li><a href="#sec-trend" class="nav-link"><i class="fa-solid fa-chart-line"></i> Trend Permohonan</a></li>
+      <li><a href="#sec-program" class="nav-link"><i class="fa-solid fa-book-open"></i> Program & Funnel</a></li>
+      <li><a href="#sec-kuota" class="nav-link"><i class="fa-solid fa-list-check"></i> Meter Sasaran Program</a></li>
+      <li><a href="#sec-sekolah" class="nav-link"><i class="fa-solid fa-school"></i> Sumber Sekolah</a></li>
+      <li><a href="#sec-demografi" class="nav-link"><i class="fa-solid fa-users"></i> Demografi</a></li>
+      <li><a href="#sec-sosial" class="nav-link"><i class="fa-solid fa-bullhorn"></i> Media Sosial</a></li>
+      <li><a href="#sec-jadual" class="nav-link"><i class="fa-solid fa-table-list"></i> Jadual Permohonan</a></li>
+      <li><a href="#sec-aktiviti" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Aktiviti Promosi</a></li>
+      <li><a href="#sec-notifikasi" class="nav-link"><i class="fa-solid fa-bell"></i> Notifikasi <span class="notif-badge" id="notif-badge"></span></a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <button class="btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> Cetak Laporan</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-left">
+        <h1>Dashboard Pengambilan Pelajar</h1>
+        <p id="header-date"></p>
+      </div>
+      <div class="header-right">
+        <span class="sesi-badge">Sesi 2026/2027</span>
+      </div>
+    </header>
+
+    <!-- SECTION: KPI CARDS -->
+    <section id="sec-kpi" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> Ringkasan Prestasi Utama</h2>
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </section>
+
+    <!-- SECTION: TREND & PROGRAM -->
+    <section id="sec-trend" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> Trend Permohonan Bulanan</h2>
+      <div class="card chart-card">
+        <div class="toggle-group" id="trend-toggle">
+          <button class="toggle-btn active" onclick="toggleTrendYoY('semasa', this)">Sesi 2026/2027</button>
+            <button class="toggle-btn" onclick="toggleTrendYoY('bandingkan', this)">Bandingkan Sesi Lalu</button>
+        </div>
+        <canvas id="chartTrend"></canvas>
+      </div>
+    </section>
+
+    <section id="sec-program" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-book-open"></i> Program & Funnel Pengambilan</h2>
+      <div class="two-col">
+        <div class="card chart-card">
+          <h3 class="card-title">Permohonan Mengikut Program</h3>
+          <canvas id="chartProgram"></canvas>
+        </div>
+        <div class="card chart-card">
+          <h3 class="card-title">Funnel Proses Pengambilan</h3>
+          <canvas id="chartFunnel"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: METER SASARAN PROGRAM -->
+    <section id="sec-kuota" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Meter Sasaran Pengambilan Per Program</h2>
+      <div class="kuota-grid" id="kuota-grid"></div>
+    </section>
+
+    <!-- SECTION: SEKOLAH -->
+    <section id="sec-sekolah" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-school"></i> 10 Sekolah Teratas (Sumber Pemohon)</h2>
+      <div class="card chart-card">
+        <canvas id="chartSekolah"></canvas>
+      </div>
+    </section>
+
+    <!-- SECTION: DEMOGRAFI -->
+    <section id="sec-demografi" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-users"></i> Profil Demografi Pemohon</h2>
+      <div class="three-col">
+        <div class="card chart-card">
+          <h3 class="card-title">Pecahan Jantina</h3>
+          <canvas id="chartJantina"></canvas>
+        </div>
+        <div class="card chart-card">
+          <h3 class="card-title">Pecahan Kaum</h3>
+          <canvas id="chartKaum"></canvas>
+        </div>
+        <div class="card chart-card">
+          <h3 class="card-title">Gred SPM Terbaik</h3>
+          <canvas id="chartGred"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: MEDIA SOSIAL -->
+    <section id="sec-sosial" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Prestasi Media Sosial</h2>
+      <div class="sosial-grid" id="sosial-grid"></div>
+    </section>
+
+    <!-- SECTION: JADUAL PERMOHONAN -->
+    <section id="sec-jadual" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-table-list"></i> Jadual Permohonan Terkini</h2>
+      <div class="card">
+        <div class="jadual-toolbar">
+          <input type="text" id="carian-input" placeholder="&#xf002;  Cari nama atau sekolah..." class="carian-input" oninput="filterJadual()" />
+          <select id="filter-status" class="filter-select" onchange="filterJadual()">
+            <option value="">Semua Status</option>
+            <option value="Ditawarkan">Ditawarkan</option>
+            <option value="Menunggu">Menunggu</option>
+            <option value="Ditolak">Ditolak</option>
+            <option value="Didaftar">Didaftar</option>
+          </select>
+        </div>
+        <div class="table-wrapper">
+          <table class="jadual" id="jadual-permohonan">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nama Pemohon</th>
+                <th>Sekolah</th>
+                <th>Program Dipohon</th>
+                <th>Gred SPM</th>
+                <th>Tarikh Mohon</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="jadual-body"></tbody>
+          </table>
+        </div>
+        <p class="jadual-count" id="jadual-count"></p>
+      </div>
+    </section>
+
+    <!-- SECTION: AKTIVITI PROMOSI -->
+    <section id="sec-aktiviti" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Aktiviti Promosi</h2>
+      <div class="aktiviti-grid" id="aktiviti-grid"></div>
+    </section>
+
+    <!-- SECTION: NOTIFIKASI -->
+    <section id="sec-notifikasi" class="section">
+      <h2 class="section-title"><i class="fa-solid fa-bell"></i> Notifikasi & Amaran</h2>
+      <div class="notif-list" id="notif-list"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <p>Politeknik Balik Pulau &mdash; Sistem Dashboard Pengambilan Pelajar &copy; 2026</p>
+    </footer>
+
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

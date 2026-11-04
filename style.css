@@ -1,0 +1,487 @@
+/* =============================================
+   CSS VARIABLES & RESET
+   ============================================= */
+:root {
+  --primary: #1a56a8;
+  --primary-light: #2563eb;
+  --primary-dark: #1e3a6e;
+  --accent: #3b82f6;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #0891b2;
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-alt: #f7f9fc;
+  --border: #dde3ec;
+  --text: #1a2332;
+  --text-muted: #5a6a80;
+  --sidebar-w: 240px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.08);
+  --radius: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =============================================
+   SIDEBAR
+   ============================================= */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--primary-dark);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  background: #ffffff;
+}
+.sidebar-logo {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  display: block;
+}
+
+.nav-list { list-style: none; padding: 10px 0; flex: 1; }
+.nav-list li { margin: 2px 0; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  border-radius: 6px;
+  margin: 0 8px;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-link i { width: 18px; text-align: center; font-size: 14px; }
+.nav-link:hover, .nav-link.active {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.nav-link.active { font-weight: 600; }
+
+.sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.12); }
+.btn-print {
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  transition: background 0.2s;
+}
+.btn-print:hover { background: var(--primary-light); }
+
+/* =============================================
+   MAIN CONTENT
+   ============================================= */
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 0 28px 40px;
+  max-width: calc(100vw - var(--sidebar-w));
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+.top-header h1 { font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+.top-header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.sesi-badge {
+  background: var(--primary);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =============================================
+   SECTIONS & CARDS
+   ============================================= */
+.section { margin-bottom: 36px; }
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title i { color: var(--accent); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.chart-card canvas { max-height: 300px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+
+/* =============================================
+   KPI CARDS
+   ============================================= */
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card .kpi-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.kpi-card .kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary-dark);
+}
+.kpi-card .kpi-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.kpi-card .kpi-sub {
+  font-size: 11px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+.kpi-card .progress-bar-wrap {
+  margin-top: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  height: 5px;
+  overflow: hidden;
+}
+.kpi-card .progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.8s ease;
+}
+.kpi-positive { color: var(--success); }
+.kpi-negative { color: var(--danger); }
+.kpi-neutral  { color: var(--warning); }
+
+/* =============================================
+   MEDIA SOSIAL
+   ============================================= */
+.sosial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.sosial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.sosial-card .sosial-icon { font-size: 28px; margin-bottom: 10px; }
+.sosial-card .sosial-platform { font-size: 13px; font-weight: 700; color: var(--text); }
+.sosial-card .sosial-val { font-size: 22px; font-weight: 700; color: var(--primary); margin: 4px 0; }
+.sosial-card .sosial-label { font-size: 11px; color: var(--text-muted); }
+.sosial-card .sosial-sub { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+.sosial-card .sosial-change { font-size: 12px; font-weight: 600; margin-top: 4px; }
+
+/* =============================================
+   JADUAL PERMOHONAN
+   ============================================= */
+.jadual-toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.carian-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+}
+.carian-input:focus { border-color: var(--accent); }
+.filter-select {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--surface);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+.table-wrapper { overflow-x: auto; }
+.jadual {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.jadual thead th {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.jadual tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+.jadual tbody tr:hover { background: var(--surface-alt); }
+.jadual tbody td { padding: 10px 12px; }
+.jadual-count { font-size: 12px; color: var(--text-muted); margin-top: 10px; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-ditawarkan { background: #dcfce7; color: #16a34a; }
+.badge-menunggu   { background: #fef9c3; color: #92400e; }
+.badge-ditolak    { background: #fee2e2; color: #dc2626; }
+.badge-didaftar   { background: #dbeafe; color: #1d4ed8; }
+
+/* =============================================
+   AKTIVITI PROMOSI
+   ============================================= */
+.aktiviti-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.aktiviti-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.aktiviti-card .akt-status { font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+.akt-akan   { color: var(--info); }
+.akt-berjalan { color: var(--success); }
+.akt-selesai  { color: var(--text-muted); }
+.aktiviti-card .akt-nama { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+.aktiviti-card .akt-tarikh { font-size: 12px; color: var(--text-muted); }
+.aktiviti-card .akt-lokasi { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* =============================================
+   NOTIFIKASI
+   ============================================= */
+.notif-list { display: flex; flex-direction: column; gap: 10px; }
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.notif-item.done { opacity: 0.45; }
+.notif-item.kritikal { border-left-color: var(--danger); }
+.notif-item.amaran   { border-left-color: var(--warning); }
+.notif-item.info     { border-left-color: var(--info); }
+.notif-item.berjaya  { border-left-color: var(--success); }
+.notif-icon { font-size: 18px; margin-top: 2px; }
+.notif-item.kritikal .notif-icon { color: var(--danger); }
+.notif-item.amaran   .notif-icon { color: var(--warning); }
+.notif-item.info     .notif-icon { color: var(--info); }
+.notif-item.berjaya  .notif-icon { color: var(--success); }
+.notif-content { flex: 1; }
+.notif-title { font-size: 14px; font-weight: 600; }
+.notif-desc  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.notif-masa  { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.notif-check { font-size: 16px; color: var(--border); align-self: center; }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.page-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+/* =============================================
+   TB1: TOGGLE BUTANG YoY
+   ============================================= */
+.toggle-group {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.toggle-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+.toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+.toggle-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* =============================================
+   TB2: METER SASARAN PROGRAM
+   ============================================= */
+.kuota-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.kuota-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+.kuota-nama {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.kuota-angka {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.kuota-didaftar { font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+.kuota-slash    { font-size: 13px; color: var(--text-muted); }
+.kuota-status   {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+.kuota-hijau { background: #dcfce7; color: #16a34a; }
+.kuota-oren  { background: #fef3c7; color: #92400e; }
+.kuota-merah { background: #fee2e2; color: #dc2626; }
+.kuota-bar {
+  background: var(--border);
+  border-radius: 5px;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.kuota-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1s ease;
+}
+.kuota-peratus { font-size: 12px; font-weight: 700; text-align: right; }
+
+/* =============================================
+   TB3: BADGE NOTIFIKASI SIDEBAR
+   ============================================= */
+.notif-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  padding: 0 4px;
+  margin-left: auto;
+  line-height: 1;
+}
+.nav-link { position: relative; }
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+@media print {
+  .sidebar { display: none !important; }
+  .main-content { margin-left: 0; max-width: 100%; padding: 0 20px; }
+  .btn-print { display: none !important; }
+  .top-header { border-bottom: 2px solid #000; }
+  .card, .kpi-card, .sosial-card, .aktiviti-card, .notif-item {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .section { page-break-inside: avoid; }
+}
